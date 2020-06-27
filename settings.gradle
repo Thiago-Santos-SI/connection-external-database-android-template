@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "connection-external-database-android-template"

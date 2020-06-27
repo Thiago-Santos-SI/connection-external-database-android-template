@@ -2,6 +2,7 @@ package com.example.connection_external_database_android_template;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 
 public class Database extends Default implements Runnable {
 
@@ -60,5 +61,29 @@ public class Database extends Default implements Runnable {
                 this.connection = null;
             }
         }
+    }
+
+    public ResultSet select(String query){
+        this.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = new ExecuteDB(this.connection, query).execute().get();
+        }catch (Exception e){
+            this.mensagem = e.getMessage();
+            this.status = false;
+        }
+        return resultSet;
+    }
+
+    public ResultSet execute(String query){
+        this.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = new ExecuteDB(this.connection, query).execute().get();
+        }catch (Exception e){
+            this.mensagem = e.getMessage();
+            this.status = false;
+        }
+        return resultSet;
     }
 }
